@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = mod_version
@@ -121,15 +122,31 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+
+    maven {
+        url "https://cursemaven.com"
+    }
+
 }
 
 dependencies {
+    runtimeOnly fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
+    compileOnly fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
+    runtimeOnly fg.deobf("curse.maven:blueprint-382216:5292242")
+    compileOnly fg.deobf("curse.maven:blueprint-382216:5292242")
+    runtimeOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
+    compileOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
+    runtimeOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+    compileOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+
+
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
     // The "userdev" classifier will be requested and setup by ForgeGradle.
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -145,6 +162,15 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+}
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+
+    // Sets up the mixin config; this gets added to run configurations and the manifest in the final jar
+    config "${mod_id}.mixins.json"
+
+    // Enables exporting mixin-changed classes to .mixin.out in the run folder
+    debug.export = true
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
