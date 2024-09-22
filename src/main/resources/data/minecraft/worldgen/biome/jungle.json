@@ -15,7 +15,24 @@
     }
   },
   "carvers": {},
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aoemod:aoe_jungle_tree"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+
+  ],
   "has_precipitation": true,
   "spawners": {
     "monster": [

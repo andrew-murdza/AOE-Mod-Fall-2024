@@ -19,7 +19,7 @@ public class AmethystGrowthRate {
                     target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"))
     public int nextInt(RandomSource random, int n, BlockState state, ServerLevel world, BlockPos pos, RandomSource random1) {
         if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChance(world, Config.AMETHYST_GROWTH_CHANCE)?0:1;
+            return Helper.withChanceToInt(world, Config.AMETHYST_GROWTH_CHANCE);
         }
         return random.nextInt(n);
     }

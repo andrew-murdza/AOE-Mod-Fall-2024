@@ -1,6 +1,10 @@
 package net.amurdza.examplemod;
 
 import com.mojang.logging.LogUtils;
+import net.amurdza.examplemod.block.ModBlocks;
+import net.amurdza.examplemod.item.ModItems;
+import net.amurdza.examplemod.worldgen.feature.ModFeatures;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -33,6 +37,14 @@ public class AOEMod
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
+        //custom items
+        ModItems.register(modEventBus);
+
+        //custom blocks
+        ModBlocks.register(modEventBus);
+
+        ModFeatures.register(modEventBus);
+
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHelper.SPEC);
     }
@@ -45,7 +57,11 @@ public class AOEMod
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-
+        if(event.getTabKey()== CreativeModeTabs.NATURAL_BLOCKS||event.getTabKey()==CreativeModeTabs.FOOD_AND_DRINKS){
+            event.accept(ModBlocks.GRAPE_VINE.get());
+            event.accept(ModItems.GLOW_BERRIES.get());
+            event.accept(ModItems.BLUE_BERRIES.get());
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

@@ -4,6 +4,7 @@ import net.amurdza.examplemod.AOEMod;
 import net.amurdza.examplemod.Config;
 import net.amurdza.examplemod.Helper;
 import net.amurdza.examplemod.RandomCollection;
+import net.amurdza.examplemod.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -11,10 +12,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -22,6 +20,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import quek.undergarden.block.HangingGrongleLeavesBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,26 +114,29 @@ public class BoneMealEvent {
                 else if(block==Blocks.MYCELIUM){
                     growMycelium(level,pos);
                 }
-                else if(state.is(BlockTags.FLOWERS) || Helper.isBlock(block, Blocks.TALL_GRASS, Blocks.LARGE_FERN, Blocks.DEAD_BUSH)){
+                else if((block instanceof FlowerBlock || block instanceof DoublePlantBlock
+                        || block==Blocks.DEAD_BUSH)&&!(block instanceof TallSeagrassBlock||
+                        block instanceof HangingGrongleLeavesBlock|| block instanceof SmallDripleafBlock)){
+                    //state.is(BlockTags.FLOWERS), Helper.isBlock(block, Blocks.TALL_GRASS, Blocks.LARGE_FERN, Blocks.DEAD_BUSH)
                     growFlowers(level, pos);
                 }
                 else if(block==Blocks.WET_SPONGE){
                     growSponge(level,pos);
                 }
-                else if(Helper.isBlock(block, Blocks.CRIMSON_ROOTS,Blocks.WARPED_ROOTS,Blocks.NETHER_SPROUTS)){
+                else if(state.is(ModTags.Blocks.netherFlowers)){
                     List<Block> blocks= new ArrayList<>(List.of(Blocks.WARPED_NYLIUM, Blocks.CRIMSON_NYLIUM, Blocks.SOUL_SOIL));
                     if(block==Blocks.CRIMSON_ROOTS)
                         blocks.addAll(List.of(Blocks.BLACKSTONE,Blocks.BASALT,Blocks.POLISHED_BASALT));
                     Function<BlockState, Boolean> func = state1 -> blocks.contains(state1.getBlock());
                     growFlowers(level, pos, func);
                 }
-                else if(Helper.isBlock(Blocks.BLACKSTONE,Blocks.BASALT,Blocks.POLISHED_BASALT)){
+                else if(state.is(ModTags.Blocks.crimsonRootsGroundBlocks)){
                     growCrimsonRoots(level,pos);
                 }
                 else if(block==Blocks.SOUL_SAND){
                     growSoulSand(level,pos);
                 }
-                else if(Helper.isBlock(block,Blocks.SUGAR_CANE,Blocks.CACTUS)){
+                else if(state.is(ModTags.Blocks.sugarCaneCactusLike)){
                     flag = growSugarcaneCactus(level, level.random, pos, block);
                 }
                 else if(block==Blocks.NETHER_WART){
@@ -149,6 +151,9 @@ public class BoneMealEvent {
                 else if(block==Blocks.ROOTED_DIRT){
                     growRootedDirt(level,level.random,pos);
                 }
+                else if(block==Blocks.SMALL_DRIPLEAF){
+                    growSmallDripLeaf(level, level.random, pos);
+                }
                 else {
                     flag = false;
                 }
@@ -157,6 +162,12 @@ public class BoneMealEvent {
                 }
             }
         }
+    }
+
+    private static void growSmallDripLeaf(ServerLevel level, RandomSource random, BlockPos pos) {
+        Function<BlockState,Boolean> check=state ->
+                state.is(Blocks.CLAY)||state.is(BlockTags.DIRT);
+        placeBoneMeal(level,pos,check, 10, pos1->createDripLeaf(level,pos1));
     }
 
 
@@ -225,7 +236,7 @@ public class BoneMealEvent {
         BlockState state = Blocks.CRIMSON_ROOTS.defaultBlockState();
         Function<BlockPos, Boolean> func = (pos1) -> world.setBlockAndUpdate(pos1, state);
         Function<BlockState, Boolean> pred;
-        pred = blockState -> Helper.isBlock(blockState.getBlock(), Blocks.SOUL_SOIL, Blocks.BLACKSTONE, Blocks.BASALT);
+        pred = blockState -> state.is(ModTags.Blocks.netherRootsPlaceable);
         placeBoneMeal(world, pos, pred, 10, func);
     }
 

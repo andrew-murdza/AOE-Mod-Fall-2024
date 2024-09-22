@@ -1,14 +1,19 @@
 package net.amurdza.examplemod.event_handlers;
 
 import com.github.alexthe666.alexsmobs.entity.*;
-import com.github.alexthe666.alexsmobs.entity.ai.AnimalAIFleeAdult;
-import com.github.alexthe666.alexsmobs.entity.ai.EntityAINearestTarget3D;
+import com.github.alexthe666.alexsmobs.entity.ai.*;
+import com.github.alexthe666.iceandfire.entity.EntityPixie;
+import com.github.alexthe666.iceandfire.entity.ai.PixieAIFlee;
+import com.github.alexthe666.iceandfire.entity.ai.PixieAISteal;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import net.amurdza.examplemod.AOEMod;
 import net.amurdza.examplemod.Helper;
+import net.amurdza.examplemod.util.ModTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.animal.*;
@@ -38,72 +43,87 @@ public class MobAI {
 
             if(!event.getLevel().isClientSide&&entity instanceof PathfinderMob) {
                 PathfinderMob mob = (PathfinderMob) entity;
-//                if(mob.getTags().contains("aoe.checkedAI")){
-//                    return;
-//                }
-//                mob.addTag("aoe.checkedAI");
+                if(mob.getTags().contains("aoe.checkedAI")){
+                    return;
+                }
+                mob.addTag("aoe.checkedAI");
+
+                if(mob instanceof Animal || mob instanceof WaterAnimal){
+                    removeAI(mob, NearestAttackableTargetGoal.class, AvoidEntityGoal.class,
+                            NonTameRandomTargetGoal.class, HurtByTargetGoal.class, CreatureAITargetItems.class,
+                            PanicGoal.class);
+                    removeAI(mob, EntityAINearestTarget3D.class, AnimalAIFleeAdult.class,
+                            AnimalAIHurtByTargetNotBaby.class, AnimalAIHerdPanic.class, AnimalAIPanicBaby.class,
+                            TameableAIDestroyTurtleEggs.class,
+                            Class.forName("superlord.cherry_shrimp.common.entity.CherryShrimp$ShrimpAvoidEntityGoal"),
+                            Class.forName("superlord.cherry_shrimp.common.entity.CherryShrimp$ShrimpPanicGoal"));
+                }
 
                 if (entity instanceof Lionfish){
                     removeAI(mob,
-                            Class.forName("com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish$LionfishAttackGoal"),
-                            NearestAttackableTargetGoal.class);
+                            Class.forName("com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish$LionfishAttackGoal"));
                 }
-                if(entity instanceof EntityOrca){
-                    removeAI(mob, EntityAINearestTarget3D.class);
+                else if(entity instanceof EntityGiantSquid){
+                    removeAI(mob, Class.forName("com.github.alexthe666.alexsmobs.entity.EntityGiantSquid$AIAvoidWhales"));
                 }
-                if(entity instanceof EntityGiantSquid){
-                    removeAI(mob, Class.forName("com.github.alexthe666.alexsmobs.entity.EntityGiantSquid$AIAvoidWhales"),
-                            EntityAINearestTarget3D.class);
+                else if(entity instanceof EntityGrizzlyBear){
+                    removeAI(mob,
+                            Class.forName("com.github.alexthe666.alexsmobs.entity.EntityGrizzlyBear$AttackPlayerGoal"));
                 }
-                if(entity instanceof EntityCachalotWhale){
-                    removeAI(mob, EntityAINearestTarget3D.class);
+                else if(entity instanceof EntityAnteater){
+                    removeAI(mob, AnteaterAIRaidNest.class,
+                            Class.forName("com.github.alexthe666.alexsmobs.entity.EntityAnteater$AITargetAnts"));
                 }
-                if(entity instanceof EntityKomodoDragon){
-                    removeAI(mob, EntityAINearestTarget3D.class, AnimalAIFleeAdult.class, NearestAttackableTargetGoal.class);
+                else if(entity instanceof EntityBison){
+                    removeAI(mob,
+                            Class.forName("com.github.alexthe666.alexsmobs.entity.EntityBison$AIAttackNearPlayers"),
+                            Class.forName("com.github.alexthe666.alexsmobs.entity.EntityBison$AIChargeFurthest"));
                 }
-                if(entity instanceof EntityAnaconda){
-                    removeAI(mob, EntityAINearestTarget3D.class, NearestAttackableTargetGoal.class);
+                else if(entity instanceof EntityLeafcutterAnt){
+                    removeAI(mob, Class.forName("com.github.alexthe666.alexsmobs.entity.EntityLeafcutterAnt$AngerGoal"));
                 }
-                if(entity instanceof EntityJerboa){
-                    removeAI(mob, AvoidEntityGoal.class);
+                else if(entity instanceof EntityRaccoon){
+                    removeAI(mob, Class.forName("com.github.alexthe666.alexsmobs.entity.EntityRaccoon$AIStealFromVillagers"));
                 }
-                if(entity instanceof EntityGrizzlyBear){
-                    removeAI(mob, NearestAttackableTargetGoal.class, NonTameRandomTargetGoal.class);
+                else if(entity instanceof EntityRattlesnake){
+                    removeAI(mob, Class.forName("com.github.alexthe666.alexsmobs.entity.EntityRattlesnake$ShortDistanceTarget"));
+                }
+                else if(entity instanceof EntityRhinoceros){
+                    removeAI(mob, Class.forName("com.github.alexthe666.alexsmobs.entity.EntityRhinoceros$AIAttackNearPlayers"));
+                }
+                else if(entity instanceof EntityPixie){
+                    removeAI(mob, PixieAIFlee.class, PixieAISteal.class);
                 }
 
-                if (entity instanceof Wolf) {
-                    removeAI(mob, NonTameRandomTargetGoal.class);
-                } else if (entity instanceof Fox) {
-                    removeAI(mob, Fox.FoxEatBerriesGoal.class, AvoidEntityGoal.class, NearestAttackableTargetGoal.class);
+
+                else if (entity instanceof Fox) {
+                    removeAI(mob, Fox.FoxEatBerriesGoal.class);
                     addTempt(mob, Items.CHICKEN,Items.RABBIT,Items.COD,Items.TROPICAL_FISH,Items.SALMON);
                 } else if (entity instanceof Ocelot) {
-                    removeAI(mob, NearestAttackableTargetGoal.class);//,Ocelot.OcelotTemptGoal.class);
                     addTempt(mob, Items.SALMON, Items.COD, Items.TROPICAL_FISH);
                 }
                 //Goat Ramming requires brain
-                //Axotol hunting passive fish will be fixed with the datapack
+                //Axotol hunting passive fish will be fixed with the datapack and requires brain
                 //Piglin brute not attacking players with gold armor requires brain
                 else if (entity instanceof Rabbit) {
                     removeAI(mob,Class.forName("net.minecraft.world.entity.animal.Rabbit$RabbitAvoidEntityGoal"));
                     removeAI(mob,Class.forName("net.minecraft.world.entity.animal.Rabbit$RaidGardenGoal"));
-                    addTempt(mob, Helper.smallFlowerItems.toArray(new Item[0]));
+                    addTempt(mob, ModTags.Items.smallerFlowers);
                 } else if (entity instanceof Horse || entity instanceof AbstractChestedHorse) {
                     addTempt(mob, Items.HAY_BLOCK);
                 } else if (entity instanceof Cat) {
-                    removeAI(mob, NonTameRandomTargetGoal.class);
                     addTempt(mob, Items.SALMON, Items.COD, Items.TROPICAL_FISH);
                 }
                 else if (entity instanceof PolarBear) {
-                    removeAI(mob, NearestAttackableTargetGoal.class);
                     removeAI(mob,Class.forName("net.minecraft.world.entity.animal.PolarBear$PolarBearAttackPlayersGoal"));
 //                    addBreeding(mob); handled by rideablepolarbearmod
                     addTempt(mob, Items.MUTTON, Items.BEEF, Items.COD, Items.SALMON);
                 }
                 else if (entity instanceof Parrot) {
                     addTempt(1, mob, Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.APPLE);
+                    //parrot breeding
                     addBreeding(0, mob);
                 }
-                //parrot breeding
                 else if (entity instanceof MushroomCow) {
                     addTempt(mob, Items.BROWN_MUSHROOM, Items.RED_MUSHROOM);
                 }
@@ -155,6 +175,12 @@ public class MobAI {
     }
     private static void addTempt(int priority,PathfinderMob mob, Item... items){
         mob.goalSelector.addGoal(priority, new TemptGoal(mob, 1.0D, Ingredient.of(items), false));
+    }
+    private static void addTempt(int priority, PathfinderMob mob, TagKey<Item> tagKey){
+        mob.goalSelector.addGoal(priority, new TemptGoal(mob, 1.0D, Ingredient.of(tagKey), false));
+    }
+    private static void addTempt(PathfinderMob mob, TagKey<Item> tagKey){
+        addTempt(3,mob,tagKey);
     }
     private static void removeAI(Predicate<Goal> shouldRemove, PathfinderMob mob){
         removeAI(shouldRemove,mob.goalSelector);

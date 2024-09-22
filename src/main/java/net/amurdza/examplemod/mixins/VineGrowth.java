@@ -21,7 +21,7 @@ public class VineGrowth {
     @Redirect(method = "randomTick",at=@At(value = "INVOKE",target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"))
     public int hi(RandomSource pRandom, int i, BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom1){
         if(Helper.isSpecialBiome(pLevel,pPos)){
-            return Helper.withChance(pLevel, Config.VINE_GROWTH_CHANCE)?0:1;
+            return Helper.withChanceToInt(pLevel, Config.VINE_GROWTH_CHANCE);
         }
         return pRandom.nextInt(i);
     }

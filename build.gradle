@@ -138,6 +138,63 @@ dependencies {
     compileOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
     runtimeOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
     compileOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+    runtimeOnly fg.deobf("curse.maven:quark-243121:5594847")
+    compileOnly fg.deobf("curse.maven:quark-243121:5594847")
+    runtimeOnly fg.deobf("curse.maven:zetaforquark-968868:5597406")
+    compileOnly fg.deobf("curse.maven:zetaforquark-968868:5597406")
+    runtimeOnly fg.deobf("curse.maven:farmersdelight-398521:5051242")
+    compileOnly fg.deobf("curse.maven:farmersdelight-398521:5051242")
+    runtimeOnly fg.deobf("curse.maven:delightful-637529:5654704")
+    compileOnly fg.deobf("curse.maven:delightful-637529:5654704")
+    runtimeOnly fg.deobf("curse.maven:vintagedelight-949719:5626428")
+    compileOnly fg.deobf("curse.maven:vintagedelight-949719:5626428")
+    runtimeOnly fg.deobf("curse.maven:undergarden-379849:5182632")
+    compileOnly fg.deobf("curse.maven:undergarden-379849:5182632")
+    runtimeOnly fg.deobf("curse.maven:ecologics-570463:4857272")
+    compileOnly fg.deobf("curse.maven:ecologics-570463:4857272")
+    runtimeOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
+    compileOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
+    runtimeOnly fg.deobf("curse.maven:hauntedharvest-541753:5212692")
+    compileOnly fg.deobf("curse.maven:hauntedharvest-541753:5212692")
+    runtimeOnly fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")
+    compileOnly fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")
+
+    runtimeOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
+    compileOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
+
+    implementation fg.deobf("curse.maven:brighter-block-light-552271:4721366")
+
+    runtimeOnly fg.deobf("curse.maven:alexscaves-924854:5633305")
+    compileOnly fg.deobf("curse.maven:alexscaves-924854:5633305")
+
+
+    runtimeOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
+    compileOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
+
+    runtimeOnly fg.deobf("curse.maven:luminous-909107:5699118")
+    compileOnly fg.deobf("curse.maven:luminous-909107:5699118")
+
+    runtimeOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
+    compileOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
+    implementation fg.deobf("curse.maven:curiosforsamuraidynasty-309927:5367944")
+    implementation fg.deobf("curse.maven:azurelibforsamuraidynasty-817423:5727332")
+    implementation fg.deobf("curse.maven:trails-and-tales-878476:5045548")
+    implementation fg.deobf("curse.maven:trails-and-tales-878476:5045548")
+    implementation fg.deobf("curse.maven:monsters-girls-secrets-of-mermaids-1068569:5566096")
+
+    implementation fg.deobf("curse.maven:cultural-delights-574622:5512501")
+
+
+    implementation fg.deobf("curse.maven:wthit-forge-455982:5681116")
+    implementation fg.deobf("curse.maven:badpackets-615134:4784395")
+
+    implementation fg.deobf("curse.maven:cherry-shrimp-1018833:5357995")
+
+
+    //    implementation fg.deobf("curse.maven:deeper-caves-882911:5157225")
+//    runtimeOnly fg.deobf("curse.maven:bountifulcritters-1000386:5330674")
+//    compileOnly fg.deobf("curse.maven:bountifulcritters-1000386:5330674")
+
 
 
     // Specify the version of Minecraft to use.

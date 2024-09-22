@@ -2,9 +2,16 @@ package net.amurdza.examplemod.event_handlers;
 
 import net.amurdza.examplemod.Config;
 import net.amurdza.examplemod.Helper;
+import net.amurdza.examplemod.block.ModBlocks;
+import net.amurdza.examplemod.item.ModItems;
+import net.amurdza.examplemod.util.ModTags;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
@@ -20,13 +27,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CaveVines;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -84,7 +91,7 @@ public class UseEvent {
                     event.setCanceled(true);
                 }
                 else if(mob instanceof Rabbit){
-                    useFood(mob,player,stack,p-> Helper.smallFlowerItems.contains(p)&&p!=Items.WITHER_ROSE);
+                    useFoodStack(mob,player,stack,p->p.is(ModTags.Items.smallerFlowers));
                 }
                 else if(mob instanceof Horse || mob instanceof Donkey){
                     useFood(mob,player,stack,Items.HAY_BLOCK);
@@ -120,12 +127,53 @@ public class UseEvent {
         if(Helper.isBiomeNameAtPos(level,pos,SPECIAL_BIOME)){
             final Item item=event.getItemStack().getItem();
             if(!item.equals(Items.AIR)&&BLACKLISTED_USE_ITEMS.contains(item)){
-                Helper.sendMessage("You cannot place "+item+" in "+SPECIAL_BIOME);
+                String message="You cannot place "+item+" in "+SPECIAL_BIOME;
+                Helper.sendMessage(event.getEntity(),message);
                 event.setCanceled(true);
             }
         }
     }
 
+    @SubscribeEvent
+    public static void gatherFromGrapes(PlayerInteractEvent.RightClickBlock event){
+        Level pLevel=event.getLevel();
+        BlockPos pPos=event.getPos();
+        Player pEntity=event.getEntity();
+        BlockState pState=event.getLevel().getBlockState(pPos);
+        int numGrapes=Helper.isSpecialBiome(pLevel,pPos)?Config.NUM_GRAPES:1;
+        if(pState.is(ModBlocks.GRAPE_VINE.get())&&pState.getValue(BlockStateProperties.BERRIES)){
+            Block.popResource(pLevel, pPos, new ItemStack(ModBlocks.GRAPE_VINE.get().asItem(), numGrapes));
+            float f = Mth.randomBetween(pLevel.random, 0.8F, 1.2F);
+            pLevel.playSound(null, pPos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, f);
+            BlockState blockstate = pState.setValue(BlockStateProperties.BERRIES, false);
+            pLevel.setBlock(pPos, blockstate, 2);
+            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pEntity, blockstate));
+        }
+    }
+
+    @SubscribeEvent
+    public static void shearsPreventGrowingBerries(PlayerInteractEvent.RightClickBlock event){
+        Level level=event.getLevel();
+        BlockPos blockpos=event.getPos();
+        ItemStack itemStack=event.getItemStack();
+        BlockState blockstate=event.getLevel().getBlockState(blockpos);
+        if(itemStack.is(ItemTags.AXES)){
+            if(blockstate.is(ModBlocks.CAVE_VINES_PLANT.get())||blockstate.is(ModBlocks.CAVE_VINES_HEAD.get())&&
+                    blockstate.getValue(BlockStateProperties.ENABLED)){
+                Player player = event.getEntity();
+                if (player instanceof ServerPlayer) {
+                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockpos, itemStack);
+                }
+                level.playSound(player, blockpos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                BlockState blockstate1 = blockstate.setValue(BlockStateProperties.ENABLED,false);
+                level.setBlockAndUpdate(blockpos, blockstate1);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, blockpos, GameEvent.Context.of(player, blockstate1));
+                if (player != null) {
+                    itemStack.hurtAndBreak(1, player, (p_186374_) -> p_186374_.broadcastBreakEvent(event.getHand()));
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void hoeOnMossPodzol(PlayerInteractEvent.RightClickBlock event){
@@ -152,12 +200,13 @@ public class UseEvent {
         BlockState state=level.getBlockState(pos);
         Block block=state.getBlock();
         if(Helper.isSpecialBiome(level,pos)){
-            if((block==Blocks.CAVE_VINES||block==Blocks.CAVE_VINES_PLANT)&&state.getValue(BlockStateProperties.BERRIES)){
-                Block.popResource(level, pos, new ItemStack(Items.GLOW_BERRIES, Config.GLOW_BERRY_HARVEST_AMOUNT));
+            int amount=Math.max(Config.GLOW_BERRY_HARVEST_AMOUNT-1,0);
+            if((block instanceof CaveVines)&&state.getValue(BlockStateProperties.BERRIES)){
+                Block.popResource(level, pos, new ItemStack(ModItems.GLOW_BERRIES.get(), amount));
             }
             if(state.is(Blocks.SWEET_BERRY_BUSH)){
                 int age=state.getValue(BlockStateProperties.AGE_3);
-                int amount=0;
+                amount=0;
                 if(age==2){
                     amount= Config.SWEET_BERRIES_PARTIALLY_GROWN;
                 }
@@ -183,15 +232,15 @@ public class UseEvent {
     private static void useFood(Entity entity, Player player, ItemStack stack, Item item){
         useFood(entity,player,stack,p-> p==item);
     }
-    private static boolean useFood(Entity entity, Player player, ItemStack stack, Function<Item,Boolean> func){
-        if(entity instanceof Animal animal &&func.apply(stack.getItem())){
+    private static void useFoodStack(Entity entity, Player player, ItemStack stack, Function<ItemStack,Boolean> func){
+        if(entity instanceof Animal animal &&func.apply(stack)){
             if(!animal.level().isClientSide&&animal.getAge()==0&&animal.canFallInLove()){
                 if(!(animal instanceof TamableAnimal)||((TamableAnimal)animal).isTame()){
                     if(!(animal instanceof AbstractHorse)||((AbstractHorse)animal).isTamed()){
                         useItem(player,stack);
                         animal.setInLove(player);
                         animal.gameEvent(GameEvent.ENTITY_INTERACT,animal);
-                        return true;
+                        return;
                     }
                 }
             }
@@ -199,9 +248,10 @@ public class UseEvent {
                 useItem(player,stack);
                 animal.ageUp((int)((float)(-animal.getAge() / 20) * 0.1F), true);
                 animal.gameEvent(GameEvent.ENTITY_INTERACT,animal);
-                return true;
             }
         }
-        return false;
+    }
+    private static void useFood(Entity entity, Player player, ItemStack stack, Function<Item,Boolean> func){
+        useFoodStack(entity,player,stack,t->func.apply(t.getItem()));
     }
 }

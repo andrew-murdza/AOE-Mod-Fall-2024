@@ -22,7 +22,7 @@ public class MushroomMixin {
                     target ="Lnet/minecraft/util/RandomSource;nextInt(I)I",ordinal = 0))
     private int nextInt(RandomSource random, int n, BlockState state, ServerLevel world, BlockPos pos, RandomSource random1){
         if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChance(world, Config.MUSHROOM_GROWTH_CHANCE)?0:1;
+            return Helper.withChanceToInt(world, Config.MUSHROOM_GROWTH_CHANCE);
         }
         return random.nextInt(n);
     }

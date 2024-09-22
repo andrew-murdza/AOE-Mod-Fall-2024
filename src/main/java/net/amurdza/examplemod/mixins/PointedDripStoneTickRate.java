@@ -19,7 +19,7 @@ public class PointedDripStoneTickRate {
                     target = "Lnet/minecraft/util/RandomSource;nextFloat()F",ordinal = 0))
     private float nextFloat(RandomSource random, BlockState state, ServerLevel world, BlockPos pos){
         if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChance(world, Config.DRIPSTONE_INCREASE_LIQUID_CHANCE)?0:1;
+            return Helper.withChanceToInt(world, Config.DRIPSTONE_INCREASE_LIQUID_CHANCE);
         }
         return random.nextFloat();
     }
@@ -28,7 +28,7 @@ public class PointedDripStoneTickRate {
                     target = "Lnet/minecraft/util/RandomSource;nextFloat()F",ordinal = 1))
     private float nextFloat1(RandomSource random, BlockState state, ServerLevel world, BlockPos pos){
         if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChance(world, Config.DRIPSTONE_GROW_CHANCE)?0:1;
+            return Helper.withChanceToInt(world, Config.DRIPSTONE_GROW_CHANCE);
         }
         return random.nextFloat();
     }

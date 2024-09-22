@@ -18,7 +18,7 @@ public class MangrovePropaguleGrowthRate {
                     target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"))
     private int nextInt(RandomSource random, int n, BlockState state, ServerLevel world, BlockPos pos){
         if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChance(world, Config.MANGROVE_PROPAGULE_AGE_GROWTH_CHANCE)?0:1;
+            return Helper.withChanceToInt(world, Config.MANGROVE_PROPAGULE_AGE_GROWTH_CHANCE);
         }
         return random.nextInt(n);
     }
