@@ -42,7 +42,6 @@ import java.util.function.Function;
 
 import static net.amurdza.examplemod.AOEMod.MOD_ID;
 import static net.amurdza.examplemod.Config.BLACKLISTED_USE_ITEMS;
-import static net.amurdza.examplemod.Config.SPECIAL_BIOME;
 
 @Mod.EventBusSubscriber(modid = MOD_ID, bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class UseEvent {
@@ -124,10 +123,10 @@ public class UseEvent {
     public static void cancelPlace(PlayerInteractEvent.RightClickBlock event){
         final LevelAccessor level = event.getLevel();
         final BlockPos pos = event.getPos();
-        if(Helper.isBiomeNameAtPos(level,pos,SPECIAL_BIOME)){
+        if(Helper.isSpecialBiome(level,pos)){
             final Item item=event.getItemStack().getItem();
             if(!item.equals(Items.AIR)&&BLACKLISTED_USE_ITEMS.contains(item)){
-                String message="You cannot place "+item+" in "+SPECIAL_BIOME;
+                String message="You cannot place "+item+" in starter biomes";//+SPECIAL_BIOME;
                 Helper.sendMessage(event.getEntity(),message);
                 event.setCanceled(true);
             }

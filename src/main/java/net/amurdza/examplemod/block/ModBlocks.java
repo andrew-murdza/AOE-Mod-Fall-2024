@@ -24,6 +24,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLUE_BERRY_BUSH=registerBlock("blue_berry_bush", ()->new BlueBerryBush(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> CAVE_VINES_HEAD=registerBlock("cave_vines", ()->new CaveVinesHeadNew(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().lightLevel(CaveVines.emission(15)).instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY).noOcclusion()));
     public static final RegistryObject<Block> CAVE_VINES_PLANT=registerBlock("cave_vines_plant", ()->new CaveVinesPlantNew(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().lightLevel(CaveVines.emission(15)).instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY).noOcclusion()));
+    public static final RegistryObject<Block> SEA_PICKLE=registerBlock("sea_pickle",()->new SeaPickleNew(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).lightLevel((p_152680_) -> {
+        return SeaPickleBlock.isDead(p_152680_) ? 0 : 3 + 3 * p_152680_.getValue(SeaPickleBlock.PICKLES);
+    }).sound(SoundType.SLIME_BLOCK).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static void register(IEventBus eventBus){
         BLOCKS.register(eventBus);

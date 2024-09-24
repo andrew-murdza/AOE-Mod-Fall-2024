@@ -1,32 +1,27 @@
 package net.amurdza.examplemod;
 
-import net.minecraft.client.Minecraft;
+import net.amurdza.examplemod.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.common.ForgeHooks;
 
-import javax.swing.text.html.parser.Entity;
-import java.util.ArrayList;
+import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Helper {
@@ -47,6 +42,42 @@ public class Helper {
     }
     public static boolean isOkToPlace(Level level, BlockPos pos, Block block){
         return !Helper.isSpecialBiome(level,pos)||!Helper.isBlackListed(block);
+    }
+    public static int getDiffLevel(Holder<Biome> biome){
+        if(biome.unwrapKey().isPresent()){
+            ResourceKey<Biome> key=biome.unwrapKey().get();
+            if(Config.DIFF_MAP.containsKey(key)){
+                return Config.DIFF_MAP.get(key);
+            }
+        }
+        return 1;
+    }
+    public static int getDiffLevel(Level level, BlockPos pos){
+        return getDiffLevel(level.getBiome(pos));
+    }
+    public static int getDiffLevel(Entity entity){
+        return getDiffLevel(entity.level().getBiome(entity.getOnPos()));
+    }
+
+    public static boolean isFromPlayer(@Nullable Entity entity){
+        return entity instanceof Player||entity instanceof TamableAnimal animal && animal.getOwner() instanceof Player;
+    }
+    public static boolean isFromPlayer(DamageSource source){
+        return isFromPlayer(source.getEntity());
+    }
+
+    public static int getLevel(Entity entity){
+        Player player=null;
+        if(entity instanceof Player player1){
+            player=player1;
+        }
+        else if(entity instanceof TamableAnimal animal&&animal.getOwner() instanceof Player player1){
+            player=player1;
+        }
+        return player!=null?player.experienceLevel:Helper.getDiffLevel(entity);
+    }
+    public static int getLevel(DamageSource source, Entity entityDefending){
+        return source.getEntity()!=null?getLevel(source.getEntity()):getLevel(entityDefending);
     }
 
     public static boolean isBlock(Block block, Block... blocks){
@@ -76,6 +107,14 @@ public class Helper {
         player.displayClientMessage(MutableComponent.create(new LiteralContents(message)),true);
     }
 
+    public static int nextIntCropsGrow(Level level, BlockPos pos, BlockState state, RandomSource random, int n){
+        return ForgeHooks.onCropsGrowPre(level,pos,state,random.nextInt(n)==0)?0:1;
+    }
+
+    public static int nextFloatCropsGrow(Level level, BlockPos pos, BlockState state, RandomSource random, double d){
+        return ForgeHooks.onCropsGrowPre(level,pos,state,random.nextFloat()<d)?0:1;
+    }
+
     public static ResourceKey<Biome> getBiomeNameAtPos(LevelAccessor level, BlockPos pos) {
         return getBiomeName(level.getBiome(pos));
     }
@@ -83,9 +122,9 @@ public class Helper {
         return getBiomeNameAtPos(level,pos).equals(name);
     }
     public static boolean isSpecialBiome(LevelAccessor level, BlockPos pos){
-        return isBiomeNameAtPos(level,pos,Config.SPECIAL_BIOME);
+        return level.getBiome(pos).is(ModTags.Biomes.tropicalBiomes);//isBiomeNameAtPos(level,pos,Config.SPECIAL_BIOME);
     }
-    public static boolean isSpecialBiome(LivingEntity entity){
+    public static boolean isSpecialBiome(Entity entity){
         return entity!=null&&isSpecialBiome(entity.level(),entity.getOnPos());
     }
 }

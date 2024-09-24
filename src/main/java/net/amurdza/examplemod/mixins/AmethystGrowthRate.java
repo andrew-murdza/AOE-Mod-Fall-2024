@@ -1,11 +1,9 @@
 package net.amurdza.examplemod.mixins;
 
-import net.amurdza.examplemod.Config;
 import net.amurdza.examplemod.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BuddingAmethystBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,9 +16,6 @@ public class AmethystGrowthRate {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"))
     public int nextInt(RandomSource random, int n, BlockState state, ServerLevel world, BlockPos pos, RandomSource random1) {
-        if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChanceToInt(world, Config.AMETHYST_GROWTH_CHANCE);
-        }
-        return random.nextInt(n);
+        return Helper.nextIntCropsGrow(world,pos,state,random,n);
     }
 }

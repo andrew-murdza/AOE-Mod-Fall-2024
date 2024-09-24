@@ -15,6 +15,6 @@ import samebutdifferent.ecologics.block.PricklyPearBlock;
 public class PricklyBearGrowthRatePart1 {
     @Redirect(method = "randomTick",at= @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"))
     private int hi(RandomSource instance, int i, BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom){
-        return Helper.isSpecialBiome(pLevel,pPos)?Helper.withChanceToInt(pLevel,Config.PRICKLY_PEAR_GROWH_CHANCE):instance.nextInt(i);
+        return Helper.nextIntCropsGrow(pLevel,pPos,pState,pRandom,i);
     }
 }

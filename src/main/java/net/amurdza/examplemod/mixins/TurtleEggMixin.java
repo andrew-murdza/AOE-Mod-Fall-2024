@@ -26,41 +26,14 @@ public class TurtleEggMixin {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/level/block/TurtleEggBlock;shouldUpdateHatchLevel(Lnet/minecraft/world/level/Level;)Z"))
     private boolean shouldHatchProgress(TurtleEggBlock instance, Level pLevel, BlockState pState, ServerLevel level, BlockPos pPos, RandomSource pRandom){
-        if(Helper.isSpecialBiome(pLevel,pPos)){
-            return Helper.withChance(pLevel, Config.TURTLE_HATCH_CHANCE);
-        }
-        return shouldUpdateHatchLevel(pLevel);
+        float f = pLevel.getTimeOfDay(1.0F);
+        return Helper.nextFloatCropsGrow(pLevel,pPos,pState,pRandom,(double)f < 0.69D && (double)f > 0.65D?1:0.002)==0;
     }
 
-    @Shadow
-    private boolean shouldUpdateHatchLevel(Level p_57766_) {
-        float f = p_57766_.getTimeOfDay(1.0F);
-        if ((double)f < 0.69D && (double)f > 0.65D) {
-            return true;
-        } else {
-            return p_57766_.random.nextInt(500) == 0;
-        }
-    }
-
-    @Redirect(method = "destroyEgg",
+    @Redirect(method = "canDestroyEgg",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/block/TurtleEggBlock;canDestroyEgg(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;)Z"))
-    private boolean protectEgg(TurtleEggBlock instance, Level pLevel, Entity pEntity){
-        if(Helper.isSpecialBiome(pLevel,pEntity.getOnPos())){
-            return false;
-        }
-        return canDestroyEgg(pLevel,pEntity);
-    }
-    @Shadow
-    private boolean canDestroyEgg(Level p_57768_, Entity p_57769_) {
-        if (!(p_57769_ instanceof Turtle) && !(p_57769_ instanceof Bat)) {
-            if (!(p_57769_ instanceof LivingEntity)) {
-                return false;
-            } else {
-                return p_57769_ instanceof Player || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(p_57768_, p_57769_);
-            }
-        } else {
-            return false;
-        }
+                    target = "Lnet/minecraftforge/event/ForgeEventFactory;getMobGriefingEvent(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;)Z"))
+    private boolean protectEgg(Level level, Entity entity){
+        return !Helper.isSpecialBiome((LivingEntity) entity)&&net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(level,entity);
     }
 }

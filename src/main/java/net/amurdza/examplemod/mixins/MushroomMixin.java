@@ -21,10 +21,7 @@ public class MushroomMixin {
             at = @At(value = "INVOKE",
                     target ="Lnet/minecraft/util/RandomSource;nextInt(I)I",ordinal = 0))
     private int nextInt(RandomSource random, int n, BlockState state, ServerLevel world, BlockPos pos, RandomSource random1){
-        if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChanceToInt(world, Config.MUSHROOM_GROWTH_CHANCE);
-        }
-        return random.nextInt(n);
+        return Helper.nextIntCropsGrow(world,pos,state,random,n);
     }
 
     @Redirect(method = "canSurvive",

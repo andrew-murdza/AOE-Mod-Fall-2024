@@ -130,66 +130,195 @@ repositories {
 }
 
 dependencies {
+    //Lionfish (plus meat), Nautilus, (tall) Pickelweed, mulberry vine and products, Thrasher, Great Thrasher
+        //Potion of repellance, mulberry jam, mulberry pie, glass door+ trapdoor, Elder eye, prismarine rod
+        //Luminous Prismarine, pickelweed block, new coral, (chiseled) scute shingles (slabs, stairs, wall)
+        //Tooth block slab stair wall door trapdoor, tooth lantern
+        //Need to check jellyfish
+        //Disable slow movement from pickelweed
     runtimeOnly fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
     compileOnly fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
     runtimeOnly fg.deobf("curse.maven:blueprint-382216:5292242")
     compileOnly fg.deobf("curse.maven:blueprint-382216:5292242")
-    runtimeOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
-    compileOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
-    runtimeOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
-    compileOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+
+
+
+    //Quark: Foxhound, Tortoise, Forgotten, Wraith, Crab, Glass Item Frames, Gold bars, hedges, more brick types,
+        //More mud blocks, more potted plants, nether brick fence gate, raw ore bricks, shear vine tips, soul sand stone,
+        //Permafrost,
+        //Azalea wood, Glowing mushroom (also on other blocks for mushrooms), giant glowing mushroom subblocks, trumpet trees
+        //Variant chests?
     runtimeOnly fg.deobf("curse.maven:quark-243121:5594847")
     compileOnly fg.deobf("curse.maven:quark-243121:5594847")
     runtimeOnly fg.deobf("curse.maven:zetaforquark-968868:5597406")
     compileOnly fg.deobf("curse.maven:zetaforquark-968868:5597406")
+
+    //rice, tomatoes, onions, cabbage, pumpkin (from crafting), fruit salad, mixed salad,
+    // cooked rice, bone broth, fried rice, bacon and eggs, Steak and Potatoes, Grilled Salmon,
+    //Squid ink pasta (wheat instead of raw pasta)
+    //Maybe: nether salad
     runtimeOnly fg.deobf("curse.maven:farmersdelight-398521:5051242")
     compileOnly fg.deobf("curse.maven:farmersdelight-398521:5051242")
+
+    //Cantaloupe slice, Cantaloupe crop, Cantaloup block, stuffed cantaloupe
     runtimeOnly fg.deobf("curse.maven:delightful-637529:5654704")
     compileOnly fg.deobf("curse.maven:delightful-637529:5654704")
+
+    //Oats, Peanuts, Oatmeal, Oat cookies, Granola, Roasted Peanuts, nut mash
     runtimeOnly fg.deobf("curse.maven:vintagedelight-949719:5626428")
     compileOnly fg.deobf("curse.maven:vintagedelight-949719:5626428")
+    
+    //Grongle Tree
     runtimeOnly fg.deobf("curse.maven:undergarden-379849:5182632")
     compileOnly fg.deobf("curse.maven:undergarden-379849:5182632")
+    
+    //Prickly Pear, Coconut Crab, Coconut Tree, Coconut, Snow and Ice bricks,
+        //(need to check meat and tropical stew texture)
     runtimeOnly fg.deobf("curse.maven:ecologics-570463:4857272")
     compileOnly fg.deobf("curse.maven:ecologics-570463:4857272")
-    runtimeOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
-    compileOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
+
+
+    //Corn crop
     runtimeOnly fg.deobf("curse.maven:hauntedharvest-541753:5212692")
     compileOnly fg.deobf("curse.maven:hauntedharvest-541753:5212692")
+    runtimeOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
+    compileOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
+
+
+
+    //Wildflower and Lavender
+    runtimeOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
+    compileOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
     runtimeOnly fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")
     compileOnly fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")
 
-    runtimeOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
-    compileOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
+
+
+
+
+
+    //Ice and Fire: Siren, Lightning Dragon, Fire Dragon, Ice Dragon, Death worm, Troll, (Pixie?), Hippocampus,
+        //Cockatrice, Stymphalian Bird, Gorgon, Cyclops, Dread Queen, Lich, Thralls, Ghouls, Scuttlers, Dread Knights
+
+        //Try to add Amphithere, Hippogryph, hydra, Sea Serpent
+
+        //Items: All except copper, chains, sticky chains, (maybe silver), Weezer, saphire
+        //Prevent rotten egg
+    
+        //Blocks: (maybe: silver block, silver ore, silver piles, gold piles), Dreadstone, dreadstone spawner,
+        // dragon nest, dragon bricks, dragon forge, block of sea serpent scales, block of dragon bones
+        //Structures: Cyclops cave-like (for all bosses), Masoleum, Siren Islands (but with moss)
+    runtimeOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
+    compileOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
+
+    //Luminous: Miner Zombie, Miner Skeleton, Frigid Zombie, Frigid Skeleton, Swamp Zombie, Swamp Skeleton,
+        //Hollow, Dark Forest Zombie, Dark Forest Skeleton, Tree Ent, Mummy, Yeti
+        //Blocks: Blue berries
+        //Items: blue berries, NEED TO INVESTIGATE DROPS OF MOBS
+    runtimeOnly fg.deobf("curse.maven:luminous-909107:5699118")
+    compileOnly fg.deobf("curse.maven:luminous-909107:5699118")
+
+    //Kitsune, Twotailed, Jorgumo, Akaname, Oni, all weapons, all ores, all armors
+    runtimeOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
+    compileOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
+    implementation fg.deobf("curse.maven:curiosforsamuraidynasty-309927:5367944")
+    implementation fg.deobf("curse.maven:azurelibforsamuraidynasty-817423:5727332")
+
+
+    //Firefly Flower from another mod?
+
+    //Glowing Torch flower
+    implementation fg.deobf("curse.maven:trails-and-tales-878476:5045548")
+    implementation fg.deobf("curse.maven:trails-and-tales-878476:5045548")
+
+    //Tropical Pygmy Mermaid, Depth Slasher, Deep Digger
+    implementation fg.deobf("curse.maven:monsters-girls-secrets-of-mermaids-1068569:5566096")
+
+    //Corn item
+    implementation fg.deobf("curse.maven:cultural-delights-574622:5512501")
+
 
     implementation fg.deobf("curse.maven:brighter-block-light-552271:4721366")
+    implementation fg.deobf("curse.maven:wthit-forge-455982:5681116")
+    implementation fg.deobf("curse.maven:badpackets-615134:4784395")
+
+    //Cherry Shrimp
+    implementation fg.deobf("curse.maven:cherry-shrimp-1018833:5357995")
+
+    //Solaria  boss
+    implementation fg.deobf("curse.maven:mokels-rpg-2-sunrise-971989:5203317")
+
+    //kinora boss
+    implementation fg.deobf("curse.maven:mokels-bossfight-kinora-1007397:5299291")
+
+    //Alex's Mobs: Mimicube, Farseer, Void Worm, Enderiophage, Straddler, Soul Vulture, Warped Mosco, Drop Bear,
+    // Crimson Mosquito, Guster, Frostalker, Murmur, Minoshroom, Bunfungus, Cave Centipede
+    runtimeOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
+    compileOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
+    runtimeOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+    compileOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+
+
+
 
     runtimeOnly fg.deobf("curse.maven:alexscaves-924854:5633305")
     compileOnly fg.deobf("curse.maven:alexscaves-924854:5633305")
 
 
-    runtimeOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
-    compileOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
+    //Twilight Forest: Urghast, Hydra, Armored Giant, Giant Miner, Knight Phantom (6), Carminite Golem, Stable Ice Core
+        //Snow Queen, Unstable Ice Core, Snow Guardian, Yeti, Alpha Yeti, Naga, Redcap Goblin/Sapper, Minotaur,
+        //Cave Troll, Slime Beetle, Skeleton Druid, Hedge Spider, King Spider, Pinch Beetle
 
-    runtimeOnly fg.deobf("curse.maven:luminous-909107:5699118")
-    compileOnly fg.deobf("curse.maven:luminous-909107:5699118")
+        //Add twilight lich?
 
-    runtimeOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
-    compileOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
-    implementation fg.deobf("curse.maven:curiosforsamuraidynasty-309927:5367944")
-    implementation fg.deobf("curse.maven:azurelibforsamuraidynasty-817423:5727332")
-    implementation fg.deobf("curse.maven:trails-and-tales-878476:5045548")
-    implementation fg.deobf("curse.maven:trails-and-tales-878476:5045548")
-    implementation fg.deobf("curse.maven:monsters-girls-secrets-of-mermaids-1068569:5566096")
+        //Carminite Golem: Replace planks with dark oak planks
+        //Minotaur: Remove Maze map focus and add 1 more raw meef
+        //Urghast: Remove Carminite and replace with more fiery tears
+        //
+    implementation fg.deobf("curse.maven:the-twilight-forest-227639:5468648")
 
-    implementation fg.deobf("curse.maven:cultural-delights-574622:5512501")
+    //Cataclysm: Netherite Monstrousity, Ender Golem, Ender Guardian, Ignis, The Prowler, The Leviathan, Deepling,
+        // Deepling Brute, Deepling Angler, Deepling Priest, Deepling Warlock, Coralssus, Wadjet, Ancient Remnant
+        // The Harbinger
+
+        //Coralssus remove coral chunk drop and replace with coral blocks, sponges, fans, and nautilus shell
+        //Leviathan: Prevent status losses as if having amethyst crab
+
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:5474791")
+    implementation fg.deobf("curse.maven:lionfish-api-1001614:5363774")
+
+    //BetterEnd: Cubozoa, EndFish, Pink forest, Chorus Forest, Shadow Forest, Umbra Jungle
+
+    //Stalwart Dungeons: Reinforced Blaze, Propulk
+    implementation fg.deobf("curse.maven:stalwart-dungeons-474817:4703671")
+
+    //Born in Chaos: Supreme Bonescaller, Skeleton Thrasher, Bonescaller, Infernal Spirit, Barrel Zombie, Restless Spirit,
+    //(Pumpkin Spirit?), Seared Spirit, Dire hound, Dire hound leader, Fallen Chaos Knight, Lifestealer, Mr. Pumpkin,
+    //Sir Pumpkinhead, Senor Pumpkin, Lord Pumpkinhead,
+    implementation fg.deobf("curse.maven:born-in-chaos-686437:5369688")
+
+    //Marium's Soulslike Weaponry: Day Stalker, Night Prowler, Withered Demon, Forlorn, Soulmass, Frost Giant, Rime Spectre
+    //The Decaying King, The Old Champion's Remains, The Returning Knight, The Fallen Icon, The Monarch of Chaos,
+    //
+    implementation fg.deobf("curse.maven:mariums-soulslike-weaponry-632066:5662104")
+    implementation fg.deobf("curse.maven:projectile-damage-attribute-643780:4597791")
+    implementation fg.deobf("curse.maven:attributefix-280510:4911084")
 
 
-    implementation fg.deobf("curse.maven:wthit-forge-455982:5681116")
-    implementation fg.deobf("curse.maven:badpackets-615134:4784395")
+    //Bossominium: Fallarota, Redstone Turret, Fungal Brute, Fungal Brute, Netherrack Heart, Soul Reaper, Badlands Colossal
+    //Chorus Beast, Strayed Warrior, Drowned King,
 
-    implementation fg.deobf("curse.maven:cherry-shrimp-1018833:5357995")
+    implementation fg.deobf("curse.maven:bossominium-694188:5287096")
 
+    //Mowzie's Mobs: Umvuthi, Umvuthana, the Sunbird, Ferrous Wroughtnaut, Frostmaw, (Lantern? Passive), Naga,
+    implementation fg.deobf("curse.maven:mowzies-mobs-250498:5399941")
+
+    //Majrusz's Progressive Difficulty: Cerberus, Zombie Giant
+//    implementation fg.deobf("curse.maven:majruszs-progressive-difficulty-430642:5293465")
+//    implementation fg.deobf("curse.maven:majrusz-library-437409:5302100")
+
+    //Faded Conquest II: Aero Guardian; Doomharbour Lich; Dyrolian, The Faded King
+//    implementation fg.deobf("curse.maven:faded-conquest-ii-1023370:5556522")
 
     //    implementation fg.deobf("curse.maven:deeper-caves-882911:5157225")
 //    runtimeOnly fg.deobf("curse.maven:bountifulcritters-1000386:5330674")

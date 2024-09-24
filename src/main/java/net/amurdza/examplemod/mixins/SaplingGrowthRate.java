@@ -19,9 +19,6 @@ public class SaplingGrowthRate {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"))
     private int nextInt(RandomSource random, int n, BlockState state, ServerLevel world, BlockPos pos){
-        if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChanceToInt(world, Config.SAPLING_GROWTH_CHANCE);
-        }
-        return random.nextInt(n);
+        return Helper.nextIntCropsGrow(world,pos,state,random,7);
     }
 }

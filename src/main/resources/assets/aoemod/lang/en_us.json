@@ -4,5 +4,7 @@
   "block.aoemod.cave_vines_plant": "Cave Vines Plant",
   "item.aoemod.glow_berries":"Glow Berries",
   "item.aoemod.blue_berries":"Blue Berries",
-  "block.aoemod.blue_berry_bush":"Blue Berry Bush"
+  "block.aoemod.blue_berry_bush":"Blue Berry Bush",
+  "block.aoemod.sea_pickle":"Sea Pickles",
+  "item.aoemod.sea_pickle":"Sea Pickle"
 }

@@ -1,11 +1,9 @@
 package net.amurdza.examplemod.mixins;
 
-import net.amurdza.examplemod.Config;
 import net.amurdza.examplemod.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,18 +16,12 @@ public class PointedDripStoneTickRate {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/util/RandomSource;nextFloat()F",ordinal = 0))
     private float nextFloat(RandomSource random, BlockState state, ServerLevel world, BlockPos pos){
-        if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChanceToInt(world, Config.DRIPSTONE_INCREASE_LIQUID_CHANCE);
-        }
-        return random.nextFloat();
+        return Helper.nextFloatCropsGrow(world,pos,state,random,0.011377778F);
     }
     @Redirect(method = "randomTick",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/util/RandomSource;nextFloat()F",ordinal = 1))
     private float nextFloat1(RandomSource random, BlockState state, ServerLevel world, BlockPos pos){
-        if(Helper.isSpecialBiome(world,pos)){
-            return Helper.withChanceToInt(world, Config.DRIPSTONE_GROW_CHANCE);
-        }
-        return random.nextFloat();
+        return Helper.nextFloatCropsGrow(world,pos,state,random,0.17578125F);
     }
 }

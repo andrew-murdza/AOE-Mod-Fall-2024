@@ -4,24 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.NyliumBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(NyliumBlock.class)
 public class NyliumNotKilledByGiantFungus {
-    @Shadow
-    private static boolean canBeNylium(BlockState pState, LevelReader pReader, BlockPos pPos) {
-        BlockPos blockpos = pPos.above();
-        BlockState blockstate = pReader.getBlockState(blockpos);
-        int i = LightEngine.getLightBlockInto(pReader, pState, pPos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(pReader, blockpos));
-        return i < pReader.getMaxLightLevel();
-    }
     @Redirect(method = "canBeNylium",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/level/lighting/LightEngine;getLightBlockInto(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;I)I"))

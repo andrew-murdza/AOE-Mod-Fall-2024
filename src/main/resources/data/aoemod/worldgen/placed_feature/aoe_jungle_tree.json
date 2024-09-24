@@ -14,9 +14,60 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "offset": [
+          7,
           0,
+          7
+        ],
+        "state": {
+          "Name": "minecraft:acacia_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "offset": [
+          8,
           0,
-          0
+          7
+        ],
+        "state": {
+          "Name": "minecraft:acacia_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "offset": [
+          7,
+          0,
+          8
+        ],
+        "state": {
+          "Name": "minecraft:acacia_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "offset": [
+          8,
+          0,
+          8
         ],
         "state": {
           "Name": "minecraft:acacia_sapling",
