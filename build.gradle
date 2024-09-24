@@ -136,10 +136,8 @@ dependencies {
         //Tooth block slab stair wall door trapdoor, tooth lantern
         //Need to check jellyfish
         //Disable slow movement from pickelweed
-    runtimeOnly fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
-    compileOnly fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
-    runtimeOnly fg.deobf("curse.maven:blueprint-382216:5292242")
-    compileOnly fg.deobf("curse.maven:blueprint-382216:5292242")
+    implementation fg.deobf("curse.maven:upgradeaquatic-326895:5615651")
+    implementation fg.deobf("curse.maven:blueprint-382216:5292242")//NO TOML
 
 
 
@@ -148,49 +146,38 @@ dependencies {
         //Permafrost,
         //Azalea wood, Glowing mushroom (also on other blocks for mushrooms), giant glowing mushroom subblocks, trumpet trees
         //Variant chests?
-    runtimeOnly fg.deobf("curse.maven:quark-243121:5594847")
-    compileOnly fg.deobf("curse.maven:quark-243121:5594847")
-    runtimeOnly fg.deobf("curse.maven:zetaforquark-968868:5597406")
-    compileOnly fg.deobf("curse.maven:zetaforquark-968868:5597406")
+    implementation fg.deobf("curse.maven:quark-243121:5594847")
+    implementation fg.deobf("curse.maven:zetaforquark-968868:5597406")//NO TOML
 
     //rice, tomatoes, onions, cabbage, pumpkin (from crafting), fruit salad, mixed salad,
     // cooked rice, bone broth, fried rice, bacon and eggs, Steak and Potatoes, Grilled Salmon,
     //Squid ink pasta (wheat instead of raw pasta)
     //Maybe: nether salad
-    runtimeOnly fg.deobf("curse.maven:farmersdelight-398521:5051242")
-    compileOnly fg.deobf("curse.maven:farmersdelight-398521:5051242")
+    implementation fg.deobf("curse.maven:farmersdelight-398521:5051242")
 
     //Cantaloupe slice, Cantaloupe crop, Cantaloup block, stuffed cantaloupe
-    runtimeOnly fg.deobf("curse.maven:delightful-637529:5654704")
-    compileOnly fg.deobf("curse.maven:delightful-637529:5654704")
+    implementation fg.deobf("curse.maven:delightful-637529:5654704")
 
     //Oats, Peanuts, Oatmeal, Oat cookies, Granola, Roasted Peanuts, nut mash
-    runtimeOnly fg.deobf("curse.maven:vintagedelight-949719:5626428")
-    compileOnly fg.deobf("curse.maven:vintagedelight-949719:5626428")
+    implementation fg.deobf("curse.maven:vintagedelight-949719:5626428")
     
     //Grongle Tree
-    runtimeOnly fg.deobf("curse.maven:undergarden-379849:5182632")
-    compileOnly fg.deobf("curse.maven:undergarden-379849:5182632")
+    implementation fg.deobf("curse.maven:undergarden-379849:5182632")
     
     //Prickly Pear, Coconut Crab, Coconut Tree, Coconut, Snow and Ice bricks,
         //(need to check meat and tropical stew texture)
-    runtimeOnly fg.deobf("curse.maven:ecologics-570463:4857272")
-    compileOnly fg.deobf("curse.maven:ecologics-570463:4857272")
+    implementation fg.deobf("curse.maven:ecologics-570463:4857272")
 
 
     //Corn crop
-    runtimeOnly fg.deobf("curse.maven:hauntedharvest-541753:5212692")
-    compileOnly fg.deobf("curse.maven:hauntedharvest-541753:5212692")
-    runtimeOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
-    compileOnly fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")
+    implementation fg.deobf("curse.maven:hauntedharvest-541753:5212692")
+    implementation fg.deobf("curse.maven:moonlightforhauntedharvest-499980:5702363")//NO TOML
 
 
 
     //Wildflower and Lavender
-    runtimeOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
-    compileOnly fg.deobf("curse.maven:forestxreborn-689955:5516564")
-    runtimeOnly fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")
-    compileOnly fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")
+    implementation fg.deobf("curse.maven:forestxreborn-689955:5516564")
+    implementation fg.deobf("curse.maven:geckolibforforestxreborn-388172:5675221")//NO TOML
 
 
 
@@ -208,21 +195,18 @@ dependencies {
         //Blocks: (maybe: silver block, silver ore, silver piles, gold piles), Dreadstone, dreadstone spawner,
         // dragon nest, dragon bricks, dragon forge, block of sea serpent scales, block of dragon bones
         //Structures: Cyclops cave-like (for all bosses), Masoleum, Siren Islands (but with moss)
-    runtimeOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
-    compileOnly fg.deobf("curse.maven:iceandfire-264231:5633453")
+    implementation fg.deobf("curse.maven:iceandfire-264231:5633453")
 
     //Luminous: Miner Zombie, Miner Skeleton, Frigid Zombie, Frigid Skeleton, Swamp Zombie, Swamp Skeleton,
         //Hollow, Dark Forest Zombie, Dark Forest Skeleton, Tree Ent, Mummy, Yeti
         //Blocks: Blue berries
         //Items: blue berries, NEED TO INVESTIGATE DROPS OF MOBS
-    runtimeOnly fg.deobf("curse.maven:luminous-909107:5699118")
-    compileOnly fg.deobf("curse.maven:luminous-909107:5699118")
+    implementation fg.deobf("curse.maven:luminous-909107:5699118")
 
     //Kitsune, Twotailed, Jorgumo, Akaname, Oni, all weapons, all ores, all armors
-    runtimeOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
-    compileOnly fg.deobf("curse.maven:samuraidynasty-848381:5672395")
-    implementation fg.deobf("curse.maven:curiosforsamuraidynasty-309927:5367944")
-    implementation fg.deobf("curse.maven:azurelibforsamuraidynasty-817423:5727332")
+    implementation fg.deobf("curse.maven:samuraidynasty-848381:5672395")
+    implementation fg.deobf("curse.maven:curiosforsamuraidynasty-309927:5367944")//NO TOML
+    implementation fg.deobf("curse.maven:azurelibforsamuraidynasty-817423:5727332")//NO TOML
 
 
     //Firefly Flower from another mod?
@@ -239,8 +223,8 @@ dependencies {
 
 
     implementation fg.deobf("curse.maven:brighter-block-light-552271:4721366")
-    implementation fg.deobf("curse.maven:wthit-forge-455982:5681116")
-    implementation fg.deobf("curse.maven:badpackets-615134:4784395")
+    implementation fg.deobf("curse.maven:wthit-forge-455982:5681116")//NO TOML
+    implementation fg.deobf("curse.maven:badpackets-615134:4784395")//NO TOML
 
     //Cherry Shrimp
     implementation fg.deobf("curse.maven:cherry-shrimp-1018833:5357995")
@@ -253,16 +237,11 @@ dependencies {
 
     //Alex's Mobs: Mimicube, Farseer, Void Worm, Enderiophage, Straddler, Soul Vulture, Warped Mosco, Drop Bear,
     // Crimson Mosquito, Guster, Frostalker, Murmur, Minoshroom, Bunfungus, Cave Centipede
-    runtimeOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
-    compileOnly fg.deobf("curse.maven:alexsmobs-426558:5698791")
-    runtimeOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
-    compileOnly fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")
+    implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
+    implementation fg.deobf("curse.maven:citadelforalexsmobs-331936:5633260")//NO TOML
 
 
-
-
-    runtimeOnly fg.deobf("curse.maven:alexscaves-924854:5633305")
-    compileOnly fg.deobf("curse.maven:alexscaves-924854:5633305")
+    implementation fg.deobf("curse.maven:alexscaves-924854:5633305")
 
 
     //Twilight Forest: Urghast, Hydra, Armored Giant, Giant Miner, Knight Phantom (6), Carminite Golem, Stable Ice Core
@@ -313,6 +292,68 @@ dependencies {
     //Mowzie's Mobs: Umvuthi, Umvuthana, the Sunbird, Ferrous Wroughtnaut, Frostmaw, (Lantern? Passive), Naga,
     implementation fg.deobf("curse.maven:mowzies-mobs-250498:5399941")
 
+
+
+
+
+    implementation fg.deobf("curse.maven:unusual-fish-mod-568300:5603731")
+    implementation fg.deobf("curse.maven:deeperdarker-659011:5698212")
+
+    implementation fg.deobf("curse.maven:the-dawn-era-965477:5054070")
+    implementation fg.deobf("curse.maven:astemirlib-933306:5066295")//NO TOML
+
+    implementation fg.deobf("curse.maven:netherific-479296:4718299")
+    implementation fg.deobf("curse.maven:nethers-exoticism-486029:5338643")
+    implementation fg.deobf("curse.maven:nether-depths-upgrade-670011:5340329")
+
+    implementation fg.deobf("curse.maven:better-carrots-548721:5306948")
+    implementation fg.deobf("curse.maven:casualness-delight-909519:5009056")
+    implementation fg.deobf("curse.maven:additional-additions-forge-582387:5155724")
+    implementation fg.deobf("curse.maven:wooden-shears-443192:4574326")
+    implementation fg.deobf("curse.maven:unusual-prehistory-forge-696283:4884372")
+    implementation fg.deobf("curse.maven:critters-and-companions-574913:5367019")
+    implementation fg.deobf("curse.maven:naturalist-627986:4847009")
+    implementation fg.deobf("curse.maven:ends-delight-662675:5516009")
+    implementation fg.deobf("curse.maven:enders-delight-827163:4760462")
+    implementation fg.deobf("curse.maven:my-nethers-delight-1003673:5673085")
+    implementation fg.deobf("curse.maven:husks-drop-sand-476656:4633731")//NO TOML
+    implementation fg.deobf("curse.maven:more-dragon-eggs-358700:4670879")//NO TOML
+    implementation fg.deobf("curse.maven:always-a-wither-skull-342495:5561669")//NO TOML
+    implementation fg.deobf("curse.maven:piglin-proliferation-657831:5585039")
+    implementation fg.deobf("curse.maven:simple-netherite-horse-armor-677675:5067639")//NO TOML
+    implementation fg.deobf("curse.maven:cant-sleep-clowns-will-eat-me-430957:4593504")//NO TOML
+    implementation fg.deobf("curse.maven:sheep-consistency-forge-499863:5405348")//NO TOML
+    implementation fg.deobf("curse.maven:rideablepolarbears-932424:4840105")
+    implementation fg.deobf("curse.maven:diversity-1039632:5721182")
+    implementation fg.deobf("curse.maven:panda-genetics-tweak-432848:4943771")//NO TOML
+    implementation fg.deobf("curse.maven:instant-horse-tame-1008698:5289327")//NO TOML
+    implementation fg.deobf("curse.maven:chickensshed-282684:5294511")//NO TOML
+    implementation fg.deobf("curse.maven:illager-invasion-891324:5717430")
+    implementation fg.deobf("curse.maven:puzzles-lib-495476:5707404")//NO TOML
+    implementation fg.deobf("curse.maven:biome-spawn-point-695238:5572902")
+    implementation fg.deobf("curse.maven:golemsarefriends-684459:4577902")//NO TOML
+
+
+
+
+    implementation fg.deobf("curse.maven:mooshroom-tweaks-324553:5572251")//NO TOML
+    implementation fg.deobf("curse.maven:zombie-villagers-from-spawner-345039:5571504")//NO TOML
+    implementation fg.deobf("curse.maven:grabby-mobs-881030:5572485")
+    implementation fg.deobf("curse.maven:more-zombie-villagers-347338:5572244")//NO TOML
+    implementation fg.deobf("curse.maven:collective-342584:5631814")//NO TOML
+    implementation fg.deobf("curse.maven:overworld-piglins-881363:4976282")//NO TOML
+    implementation fg.deobf("curse.maven:no-animal-tempt-delay-952356:5572189")//NO TOML
+
+    implementation fg.deobf("curse.maven:tofucraftreload-317469:5739232")
+    implementation fg.deobf("curse.maven:bagus-lib-866533:5739157")//NO TOML
+
+    implementation fg.deobf("curse.maven:croptopia-415438:4997459")
+    implementation fg.deobf("curse.maven:epherolib-885449:4889101")//NO TOML
+
+    implementation fg.deobf("curse.maven:wooden-bucket-585328:4690935")
+    implementation fg.deobf("curse.maven:cloth-config-348521:5729105")//NO TOML
+    implementation fg.deobf("curse.maven:bucketlib-560156:5674711")//NO TOML
+
     //Majrusz's Progressive Difficulty: Cerberus, Zombie Giant
 //    implementation fg.deobf("curse.maven:majruszs-progressive-difficulty-430642:5293465")
 //    implementation fg.deobf("curse.maven:majrusz-library-437409:5302100")
@@ -321,9 +362,22 @@ dependencies {
 //    implementation fg.deobf("curse.maven:faded-conquest-ii-1023370:5556522")
 
     //    implementation fg.deobf("curse.maven:deeper-caves-882911:5157225")
-//    runtimeOnly fg.deobf("curse.maven:bountifulcritters-1000386:5330674")
-//    compileOnly fg.deobf("curse.maven:bountifulcritters-1000386:5330674")
+//    implementation fg.deobf("curse.maven:bountifulcritters-1000386:5330674")
 
+
+    //implementation fg.deobf("curse.maven:casualness-delight-909519:5181805")
+
+    //implementation fg.deobf("curse.maven:shineals-prehistoric-expansion-909176:5707888")
+    //implementation fg.deobf("curse.maven:the-midnight-304881:5644116")
+    //implementation fg.deobf("curse.maven:mythic-mounts-forge-852096:4761916")
+    //implementation fg.deobf("curse.maven:nutritious-feast-716089:4706604")
+    //implementation fg.deobf("curse.maven:unusual-foods-delight-1008289:5699219")
+    //implementation fg.deobf("curse.maven:critters-n-crawlers-979755:5650924")
+    //implementation fg.deobf("curse.maven:animal-armor-trims-1008327:5328249")     //NO TOML
+
+    //implementation fg.deobf("curse.maven:monolib-968432:5443121")                 //NO TOML
+    //implementation fg.deobf("curse.maven:nyfs-spiders-686058:4728359")            //NO TOML
+    //implementation fg.deobf("curse.maven:nethers-delight-496394:4736227")
 
 
     // Specify the version of Minecraft to use.
@@ -333,17 +387,6 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-
-    // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-
-    // Example mod dependency using a mod jar from ./libs with a flat dir repository
-    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
-    // The group id is ignored when searching -- in this case, it is "blank"
-    // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
