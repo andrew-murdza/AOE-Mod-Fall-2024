@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -25,6 +26,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Helper {
+
+    public static int getLevel(Item item){
+        return 2;
+    }
+
+    public static boolean isBoss(Entity entity){
+        return false;
+    }
+
     public static boolean isBlackListed(Block block){
         return Config.BLACKLISTED_USE_ITEMS.contains(block.asItem());
     }
