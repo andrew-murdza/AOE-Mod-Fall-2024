@@ -69,7 +69,8 @@
     "othermods.upgradeaquatic.TallPickelerweedOnMoss",
 
     "RestoreXpOnRespawn",
-    "AnvilAlwaysHasNoCost"
+    "AnvilAlwaysHasNoCost",
+    "EnchantmentAlwaysHasNoCost"
   ],
   "minVersion": "0.8.5",
   "client": [
