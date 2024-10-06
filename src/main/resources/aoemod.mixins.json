@@ -67,7 +67,9 @@
     "othermods.upgradeaquatic.LionfishNoPoison",
     "othermods.upgradeaquatic.PickelerweedOnMoss",
     "othermods.upgradeaquatic.TallPickelerweedOnMoss",
-    "RestoreXpOnRespawn"
+
+    "RestoreXpOnRespawn",
+    "AnvilAlwaysHasNoCost"
   ],
   "minVersion": "0.8.5",
   "client": [
